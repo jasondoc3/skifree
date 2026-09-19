@@ -56,7 +56,8 @@ cmake --install build
 </details>
 
 ## MacOS
-On MacOS we build an app bundle `skifree.app`. Use right-click > Open the first time to get around [unverified developer warnings](https://support.apple.com/en-nz/guide/mac-help/mh40616/mac).
+Removed: this tree targets Linux on purpose (see Credits). The upstream
+macOS bundle and Windows build support were cut, not ported.
 
 ![Screenshot 2023-11-06 at 2 07 45 pm](https://github.com/jeff-1amstudios/skifree_sdl/assets/1063652/4edce399-ddeb-499a-a554-aebb7a70dfad)
 

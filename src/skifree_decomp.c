@@ -23,10 +23,6 @@
 // entries at load plus the snow clear color and status bar colors.
 #include <string.h>
 #include <sys/stat.h>
-#if defined(__APPLE__)
-// macOS names the nanosecond timestamps st_*timespec, not st_*tim.
-#define st_mtim st_mtimespec
-#endif
 
 typedef struct { Uint8 r, g, b; } ThemeRGB;
 

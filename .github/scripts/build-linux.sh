@@ -29,10 +29,10 @@ cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_TESTS=ON -B build
 cmake --build build --
 
 # package artifact
-releasename="skifree_sdl-${BUILD_TAG}-linux-${PLATFORM_ARCH}"
+releasename="skifree-${BUILD_TAG}-linux-${PLATFORM_ARCH}"
 rm -rf "$releasename"
 mkdir "$releasename"
-cp build/skifree_sdl "$releasename/skifree_sdl"
+cp build/skifree "$releasename/skifree"
 tar -czvf "$releasename.tar.gz" "$releasename"
 echo "filename=$releasename.tar.gz" >>$GITHUB_OUTPUT
 
