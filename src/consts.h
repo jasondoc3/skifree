@@ -1,7 +1,11 @@
 #ifndef SKIFREE_DECOMP_CONSTS_H
 #define SKIFREE_DECOMP_CONSTS_H
 
-#define NUM_ACTORS 100
+// Pool is drawn down by the area-proportional spawn throttle in
+// randomActorType*(), so it has to cover the largest window we can be
+// resized to, not the original 640x480 one. Running out is no longer
+// fatal (see addActor), it just stops the terrain filling in.
+#define NUM_ACTORS 1000
 #define NUM_SPRITES 90
 #define NUM_STRINGS 20
 #define NUM_PERM_OBJECTS 256

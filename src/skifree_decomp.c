@@ -949,9 +949,9 @@ Actor* addActor(Actor* actor, BOOL insertBack) {
             actorListPtr = targetActor;
         }
         return targetActor;
-    } else {
-        assertFailed(sourceFilename, 857);
     }
+    // Original asserted here; every caller null-checks, so an exhausted pool
+    // just means no new actor this tick.
 
     return targetActor; // TODO fixme the original does `MOV EAX, EBX` but we seem to be doing `XOR EAX, EAX`
 }
@@ -3208,7 +3208,7 @@ void updateWindowSize(HWND hWnd) {
     windowClientRectWith120Margin.top = windowClientRect.top - 120;
     windowWidth = (short)(windowClientRect.right - windowClientRect.left);
     windowHeight = (short)(windowClientRect.bottom - windowClientRect.top);
-    windowWithMarginTotalArea = (windowClientRectWith120Margin.bottom - windowClientRectWith120Margin.top) * (windowClientRectWith120Margin.bottom - windowClientRectWith120Margin.left);
+    windowWithMarginTotalArea = (windowClientRectWith120Margin.bottom - windowClientRectWith120Margin.top) * (windowClientRectWith120Margin.right - windowClientRectWith120Margin.left);
 }
 
 // TODO not byte accurate
