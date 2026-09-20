@@ -55,6 +55,20 @@ magenta = "#c86bff"
 cyan = "#5cf2e0"
 ```
 
+Edits apply within a second while the game runs; deleting the file restores
+the classic look. `background`/`foreground` also work as aliases for
+`snow`/`ink`.
+
+### Omarchy sync (optional)
+
+If using omarchy, install the following plugin to have the game follow theme switches automatically:
+
+```sh
+omarchy plugin add https://github.com/jasondoc3/skifree --enable
+```
+
+Uninstalling the plugin removes everything; leftover hook and template files
+clean themselves up on the next theme switch.
 
 ## Manual Build
 

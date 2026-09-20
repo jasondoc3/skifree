@@ -1,0 +1,30 @@
+#!/bin/bash
+# Copies the rendered skifree.toml into the game's live config, atomically.
+set -euo pipefail
+
+CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME/.config"}
+STATE_HOME=${XDG_STATE_HOME:-"$HOME/.local/state"}
+SOURCE="$STATE_HOME/omarchy/current/theme/skifree.toml"
+TARGET="$CONFIG_HOME/skifree/theme.toml"
+
+# Hooks fire regardless of plugin state, so a disabled plugin must stand
+# down on its own. (omarchy's own tooling already requires jq.)
+if command -v jq >/dev/null 2>&1; then
+  enabled=$(omarchy plugin list --json 2>/dev/null \
+    | jq -r '.[] | select(.id=="jasondoc3.skifree-theme") | .enabled // empty')
+  [ "$enabled" = "true" ] || exit 0
+fi
+
+if [[ ! -f $SOURCE ]]; then
+  echo "skifree: current Omarchy theme has no skifree.toml yet (switch themes once to generate it)" >&2
+  exit 0
+fi
+
+install -d "$(dirname -- "$TARGET")"
+temporary=$(mktemp "${TARGET}.tmp.XXXXXX")
+trap 'rm -f -- "$temporary"' EXIT
+cp -- "$SOURCE" "$temporary"
+mv -- "$temporary" "$TARGET"
+trap - EXIT
+
+echo "skifree: synced $TARGET"

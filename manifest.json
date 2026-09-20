@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "jasondoc3.skifree-theme",
+  "name": "SkiFree Theme Sync",
+  "version": "0.1.0",
+  "author": "jasondoc3",
+  "description": "Syncs the active Omarchy theme to SkiFree with live reload.",
+  "license": "MIT",
+  "kinds": [
+    "service"
+  ],
+  "entryPoints": {
+    "service": "omarchy/Service.qml"
+  }
+}
