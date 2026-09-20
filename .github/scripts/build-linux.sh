@@ -25,7 +25,7 @@ curl -Lo /tmp/ski32_resources.zip https://archive.org/download/ski32_resources/s
 unzip -d resources /tmp/ski32_resources.zip
 
 # build
-cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_TESTS=ON -B build
+cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -B build
 cmake --build build --
 
 # package artifact

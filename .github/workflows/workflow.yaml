@@ -12,18 +12,24 @@ on:
 jobs:
 
   ci:
-    runs-on: ubuntu-latest
-    name: CI (Linux amd64)
+    strategy:
+      matrix:
+        platform:
+          - { name: Linux, os: ubuntu-latest, arch: amd64, script: build-linux.sh }
+          - { name: MacOS,  os: macos-latest,  arch: amd64, script: build-macos.sh }
+
+    runs-on: ${{ matrix.platform.os }}
+    name: CI (${{ matrix.platform.name }} ${{ matrix.platform.arch }})
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build
         id: build
-        run: .github/scripts/build-linux.sh
+        run: .github/scripts/${{ matrix.platform.script }}
         env:
-          PLATFORM_ARCH: amd64
+          PLATFORM_ARCH: ${{ matrix.platform.arch }}
       - name: Upload Artifact
         if: startsWith(github.ref, 'refs/tags/') || github.ref_name == 'main' || github.ref_name == 'ci-debug'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.build.outputs.filename }}
           path: ${{ steps.build.outputs.filename }}
@@ -36,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch Build Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: artifacts
       - name: Calculate Variables
@@ -45,7 +51,7 @@ jobs:
           echo "ref_name_without_v=$(echo ${GITHUB_REF_NAME} | cut -c2-)" >>$GITHUB_OUTPUT
       - name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v0.1.15
+        uses: softprops/action-gh-release@v2
         with:
           draft: false
           prerelease: false
