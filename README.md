@@ -2,14 +2,17 @@
 
 A source port of the classic [Microsoft Entertainment Pack](https://en.wikipedia.org/wiki/Microsoft_Entertainment_Pack) game "skifree" to SDL2 on Linux — plus live theming via a single `theme.toml` ([credits](#credits)).
 
+![skifree](docs/preview.png)
+
 
 ## Quick Start
 
-First install the following dependencies
+First install the following dependencies:
 
 - SDL2
 - SDL2_image
 - SDL2_ttf
+- cmake, a C compiler, curl, unzip (`install.sh` checks for all of these)
 
 Arch:
 
@@ -55,6 +58,8 @@ magenta = "#c86bff"
 cyan = "#5cf2e0"
 ```
 
+![neon theme](docs/preview-neon.png)
+
 Edits apply within a second while the game runs; deleting the file restores
 the classic look. `background`/`foreground` also work as aliases for
 `snow`/`ink`.
@@ -77,9 +82,9 @@ The install script takes care of the following steps.
 ### Resources
 You will need to place the original gfx and icon resources into `resources/`.
 You can download the original version
-from the [official Skifree website](https://ski.ihoc.net/) and extract the resources with a a PE resources extractor (e.g. [ResourcesExtract](https://www.nirsoft.net/utils/resources_extract.html))
+from the [official Skifree website](https://ski.ihoc.net/) and extract the resources with a PE resources extractor (e.g. [ResourcesExtract](https://www.nirsoft.net/utils/resources_extract.html))
 
-Alternatively, you can fetch pre-extracted resources: 
+Alternatively, you can fetch pre-extracted resources:
 ```sh
 curl -Lo /tmp/ski32_resources.zip https://archive.org/download/ski32_resources/ski32_resources.zip
 unzip -d resources /tmp/ski32_resources.zip
